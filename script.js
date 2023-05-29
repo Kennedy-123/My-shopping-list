@@ -71,7 +71,7 @@ filterItem = (e) => {
   const text = e.target.value.toLowerCase();
   
   itemList.forEach(item => {
-    const itemName = item.firstChild.textContent.toLocaleLowerCase();
+    const itemName = item.firstChild.textContent.toLowerCase();
     
     if(itemName.indexOf(text) != -1) {
       item.style.display = 'flex';
