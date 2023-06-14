@@ -49,6 +49,10 @@ header h1 {
   outline: none;
 }
 
+.form-input:focus{
+  border: 1px solid skyblue;
+}
+
 .form-input-filter {
   margin-top: 20px;
   width: 100%;
@@ -97,7 +101,8 @@ header h1 {
 }
 
 .btn-clear:hover {
-  background-color: #f1f1f1;
+  background-color: rgb(147, 214, 241);
+  color: white;
 }
 
 .text-red {

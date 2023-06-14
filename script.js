@@ -3,12 +3,37 @@ const itemInput = document.getElementById('item-input')
 const itemList = document.getElementById('item-list')
 const clearAllBtn = document.querySelector('.btn-clear')
 const filter = document.getElementById('filter')
+let itemsFromStorage;
+let storageItem;
+
+displayItems = () => {
+  const storageItem = getItemFromStorage();
+  storageItem.forEach((item) => {
+
+  })
+}
 
 addItemDom = () => {
 
   //create list item
   const li = document.createElement('li')
   li.appendChild(document.createTextNode(itemInput.value))
+  // add to storage
+  let newItem = itemInput.value
+
+  // let itemsFromStorage;
+
+  if(localStorage.getItem('items') === null){
+    itemsFromStorage = [];
+  }else{
+    itemsFromStorage = JSON.parse(localStorage.getItem('items'))
+  }
+
+  //add item to array
+  itemsFromStorage.push(newItem)
+
+  //convert to json string and set to local storage
+  localStorage.setItem('items', JSON.stringify(itemsFromStorage))
   //end
 
   //create button
@@ -27,9 +52,10 @@ addItemDom = () => {
 
   itemList.appendChild(li)
   
-  checkUI()
   //end
   itemInput.value = ''
+
+  checkUI()
 }
 
 addItem = (e) => {
@@ -41,6 +67,7 @@ addItem = (e) => {
     addItemDom()
   }
 }
+
 clearAll = () => {
   itemList.remove()
   checkUI()
@@ -53,6 +80,20 @@ removeItem = (e) => {
   }
 }
 
+getItemFromStorage = () => {
+  const itemName = itemInput.value
+  if(localStorage.getItem('items') === null){
+    storageItem = [];
+  }else{
+    storageItem = JSON.parse(localStorage.getItem('items'))
+  }
+
+  storageItem.push(itemName)
+
+  localStorage.setItem('items', JSON.stringify(storageItem));
+  return
+}
+
 checkUI = () => {
   const itemList = document.querySelectorAll('li')
   if(itemList.length === 0){
@@ -63,7 +104,6 @@ checkUI = () => {
     clearAllBtn.style.display = 'block'
   }
 }
-
 
 //filter item
 filterItem = (e) => {
@@ -87,11 +127,7 @@ itemForm.addEventListener('submit', addItem);
 clearAllBtn.addEventListener('click', clearAll);
 itemList.addEventListener('click', removeItem);
 filter.addEventListener('input', filterItem)
+window.addEventListener('DOMContentLoaded', checkUI)
+document.addEventListener('DOMContentLoaded', displayItems)
 
-checkUI()
-
-localStorage.setItem('name', 'chidera')
-
-console.log(localStorage.getItem('name'))
-// localStorage.removeItem('name')
-localStorage.clear()
+// checkUI()
