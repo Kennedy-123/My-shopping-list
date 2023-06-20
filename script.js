@@ -6,13 +6,6 @@ const filter = document.getElementById('filter')
 let itemsFromStorage;
 let storageItem;
 
-displayItems = () => {
-  const storageItem = getItemFromStorage();
-  storageItem.forEach((item) => {
-
-  })
-}
-
 addItemDom = () => {
 
   //create list item
@@ -128,6 +121,5 @@ clearAllBtn.addEventListener('click', clearAll);
 itemList.addEventListener('click', removeItem);
 filter.addEventListener('input', filterItem)
 window.addEventListener('DOMContentLoaded', checkUI)
-document.addEventListener('DOMContentLoaded', displayItems)
 
 // checkUI()
